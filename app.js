@@ -4,7 +4,10 @@ require('dotenv').config();
 const dbConnect = require("./config/connection")
 const port=process.env.PORT
 
-app.set('view engine','ejs')
+//for common route
+const common=require("./routes/commonRouter")
+app.use("/auth",common)
+
 
 dbConnect()
     .then(()=>{
