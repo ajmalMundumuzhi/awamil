@@ -53,7 +53,11 @@ exports.loginPost=async (req,res)=>{
         if(userProfile){
         const password=await bcrypt.compare(req.body.password,userProfile.password)
             if(password){
-                res.redirect('/')
+                if(userProfile.role === 'admin'){
+                    res.redirect('/admin')
+                }else{
+                    res.redirect('/')
+                }
             }
             else{
                 console.log("Your password is incorrect")

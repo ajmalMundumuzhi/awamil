@@ -7,8 +7,6 @@ commonRouter.use(express.urlencoded({ extended: true }));
 commonRouter.set('view engine','ejs')
 commonRouter.set('views','./views/common')
 
-// redirect to home
-
 
 // redirect to signup page 
 commonRouter.get('/signup',authController.signupGet)

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+                                          
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Published</title>
+</head>
+
+<body>
+    <div class="dashboard">
+        <%- include('layouts/sidebar.ejs') %>
+        <main class="main-content">
+            <h1 class="page-title">Articles</h1>
+            <div class="article-grid">
+
+                <!-- Article 1 -->
+                <% details.forEach(function(detail){%>
+                
+                <div class="article-card">
+                    <img src="<%= detail.image %>" alt="Article " class="article-image">
+                    <div class="article-content">
+                        
+                        <h2 class="article-title" ><%= detail.word %></h2>
+                        <p class="article-author" ><%= detail.sentence %></p>
+                        <p class="article-description"></p>
+
+                        <div class="article-actions">
+                            <a href="/admin/editCard/<%= detail._id %>" class="edit-btn">Edit</a>
+                            <a href="/admin/viewCardDetails/<%= detail._id %>" class="view-btn">View</a>
+                            <!-- <a href="/admin/deleteCard/" class="delete-btn">Delete</a> -->
+                            <form action="/admin/deleteCard/<%= detail._id %>" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+
+            </div>
+        </main>
+    </div>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #020e48;
+            --secondary-color: #3d44cf;
+            --text-color: #333;
+            --bg-color: #f4f4f4;
+            --card-bg: #ffffff;
+            --sidebar-width: 250px;
+            --danger-color: #f44336;
+            --danger-hover-color: #d32f2f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .dashboard {
+            display: flex;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            background-color: var(--primary-color);
+            padding: 2rem 1rem;
+            position: fixed;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-header {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .nav-item {
+            margin-bottom: 1rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .nav-link i {
+            margin-right: 0.5rem;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .article-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-category {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .article-author {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .article-description {
+            font-size: 0.9rem;
+            color: #444;
+            margin-bottom: 1rem;
+        }
+
+        .article-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .edit-btn, .view-btn, .delete-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .edit-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .view-btn {
+            background-color: #f0f0f0;
+            color: var(--text-color);
+        }
+
+        .view-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .delete-btn {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .delete-btn:hover {
+            background-color: var(--danger-hover-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content.active {
+                margin-left: var(--sidebar-width);
+            }
+
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-actions {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .edit-btn, .view-btn, .delete-btn {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    </style>
+
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+    <script src="/public/js/axios.js"></script>
+</body>
+
+</html>
