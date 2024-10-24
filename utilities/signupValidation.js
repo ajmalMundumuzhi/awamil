@@ -8,7 +8,7 @@ exports.emailValidation=(email)=>{
 }
 
 exports.passwordValidation=(password)=>{
-    const passwordRejex= /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const passwordRejex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;;
     return passwordRejex.test(password)
 }
 

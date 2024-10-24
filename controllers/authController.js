@@ -54,19 +54,20 @@ exports.loginPost=async (req,res)=>{
         const password=await bcrypt.compare(req.body.password,userProfile.password)
             if(password){
                 if(userProfile.role === 'admin'){
-                    res.redirect('/admin')
+                    res.status(200).json({user:'admin',data:'Admin login succesful'})
                 }else{
-                    res.redirect('/')
+                    res.status(200).send({user:'user',data : 'User login succesful'})
                 }
             }
             else{
                 console.log("Your password is incorrect")
-                res.redirect('/auth/login')
+                res.status(401).json({user : 'admin', data : 'Check your password'})
             }
     }
         else{
             console.log('User details is wrong, check again')
-            res.redirect('/auth/login')
+            res.status(400).json({user : 'admin', data : 'Check your Details'})
+
     }
 }
 catch(err){

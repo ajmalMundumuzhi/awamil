@@ -7,12 +7,17 @@
 </head>
 <body>
     <h1><strong>SIGNUP</strong></h1>
-    <form action="/auth/signup" method="post">
+    <form>
         <label for="email">Email</label><br>
-        <input type="email" name="mail" required placeholder="email"><br>
+        <input type="email" id="emailInput" name="mail" required placeholder="email"><br>
         <label for="pass">Password</label><br>
-        <input type="password" name="password" required placeholder="Password"><br>
-        <input type="submit" name="submit">
+        <input type="password" id="passwordInput" name="password" required placeholder="Password"><br>
+        <input type="submit" id="submit" name="submit">
+        <input type="hidden" id="error" style="color: rgb(142 0 0); width: 100%; background: none; border: none; text-align: center; padding-top: 10PX;font-size: 17PX">
+
     </form>
+
+    <script src="/common/js/signup.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 </body>
 </html>
