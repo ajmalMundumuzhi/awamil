@@ -11,7 +11,7 @@
     <div class="background"></div>
     <div class="login-container">
     <h2 class="login-title">Admin Access</h2>
-    <form action="" method="post">
+    <form    method="post">
         <div class="form-group">
         <label for="email">Email</label><br>
         <input type="email" id="emailInput" name="mail" placeholder="Type your email here" required ><br>
@@ -20,8 +20,9 @@
         <label for="pass">Password</label><br>
         <input type="password" id="passwordInput" name="password" placeholder="password" required ><br>
         </div>
-        <input class="login-button" id="submit" type="submit" name="submit">
+        <input class="login-button" id="submit" type="button" name="submit">
         <input type="hidden" id="error" style="color: rgb(142 0 0); width: 100%; background: none; border: none; text-align: center; padding-top: 10PX;font-size: 17PX">
+        <input type="hidden" name="token" id="token">
     </form>
     </div>
 

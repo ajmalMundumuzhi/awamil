@@ -1,8 +1,8 @@
-const multer = require('multer')
 const express=require('express')
 const adminRouter=express()
-const adminController=require('../controllers/adminController')
 const storage = require('../utilities/multer')
+const multer = require('multer')
+const adminController=require('../controllers/adminController')
 
 const upload=multer({storage : storage})
 

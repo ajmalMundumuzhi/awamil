@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         axios.post('/auth/login',data)
         .then((response)=>{
             console.log(response.data.user);
+            localStorage.setItem('token',response.data.token)
             
             if(response.data.user === 'admin'){
                 window.location.href='/admin'

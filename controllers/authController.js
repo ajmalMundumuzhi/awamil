@@ -1,7 +1,9 @@
 const bcrypt=require('bcrypt');
+const jwt = require('jsonwebtoken')
 const signupModel = require('../models/authModel')
 const signupValidation = require("../utilities/signupValidation")
-// redirect to home page 
+
+const JWT_SECRET = process.env.JWT_SECRET
 
 // signup setup
 exports.signupGet=(req,res)=>{
@@ -14,16 +16,16 @@ exports.signupPost=async (req,res)=>{
         const {mail,password}=req.body;
         const alreadyEmail=await signupModel.findOne({ email : mail })
         if(alreadyEmail){ 
-            res.status(422).json({message:'The email is already takes'})
+            return res.status(422).json({message:'The email is already takes'})
         }
         if(!signupValidation.validationFields([mail,password])){
-            res.status(422).json({message:'Please provide all details'})
+            return res.status(422).json({message:'Please provide all details'})
         }
         else if(!signupValidation.emailValidation(mail)){
-            res.status(422).json({message : 'Enter a valid email'})
+            return res.status(422).json({message : 'Enter a valid email'})
         }
         else if(!signupValidation.passwordValidation(password)){
-            res.status(422).json({message : 'Give a strong password'})
+            return res.status(422).json({message : 'Give a strong password'})
         }else{
             const hashedpass =await bcrypt.hash(password,10);
             const newUser=new signupModel({
@@ -51,18 +53,33 @@ exports.loginPost=async (req,res)=>{
         const userProfile= await signupModel.findOne({email:userMail})
 
         if(userProfile){
+
         const password=await bcrypt.compare(req.body.password,userProfile.password)
-            if(password){
-                if(userProfile.role === 'admin'){
-                    res.status(200).json({user:'admin',data:'Admin login succesful'})
-                }else{
-                    res.status(200).send({user:'user',data : 'User login succesful'})
-                }
+
+        if(password){
+            const token = jwt.sign(
+                {userId : userProfile._id, role : userProfile.role},
+                process.env.JWT_SECRET,
+                {expiresIn : '1h'}
+            )
+            if(userProfile.role === 'admin'){
+                res.status(200).json({
+                    user : 'admin',
+                    data : 'Admin logged in succesfully',
+                    token : token 
+                })
+            }else{
+                res.status(200).json({
+                    user : 'user',
+                    data : 'User logged in succesfully',
+                    token : token
+                })
             }
-            else{
-                console.log("Your password is incorrect")
-                res.status(401).json({user : 'admin', data : 'Check your password'})
-            }
+        }
+        else{
+            console.log("Your password is incorrect")
+            res.status(401).json({user : 'admin', data : 'Check your password'})
+        }
     }
         else{
             console.log('User details is wrong, check again')
@@ -73,4 +90,4 @@ exports.loginPost=async (req,res)=>{
 catch(err){
     console.log(`error when login to user`,err)
 }
-}
+} 

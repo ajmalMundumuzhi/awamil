@@ -3,7 +3,8 @@ const commonRouter=express()
 const authController=require('../controllers/authController');
 
 commonRouter.use(express.json())
-commonRouter.use(express.urlencoded({ extended: true }));
+commonRouter.use(express.urlencoded({ extended: true }))
+
 commonRouter.set('view engine','ejs')
 commonRouter.set('views','./views/common')
 

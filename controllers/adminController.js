@@ -1,7 +1,12 @@
+const collection = require('../models/authModel')
 const createModel=require('../models/createModel')
 
-exports.dashboardAdmin=(req,res)=>{
-    res.render('dashboard')
+exports.dashboardAdmin=async (req,res)=>{
+    const count=await collection.find()
+
+    const totalCount= count.length;
+    console.log(totalCount)
+    res.render('dashboard',{totalCount})
 }
 
 exports.createAdminGet=(req,res)=>{

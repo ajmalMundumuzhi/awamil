@@ -1,11 +1,14 @@
 const express=require('express');
 const app=express();
 require('dotenv').config();
-const dbConnect = require("./config/connection")
 const port=process.env.PORT
+const dbConnect = require("./config/connection")
 
 // loading Assets 
 app.use(express.static('./public'))
+
+// ejs view 
+app.set('view engine','ejs')
 
 //for common route
 const common=require("./routes/commonRouter")
