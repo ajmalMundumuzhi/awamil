@@ -12,7 +12,7 @@ exports.detailPage=async (req,res)=>{
         if(!mongoose.Types.ObjectId.isValid(detailId) || detailId.length !== 24){
             return res.status(400).send("invalid id format")
         }
-
+        
         const detail=await uploadedDatas.findById(detailId)
         
         if(!detail){

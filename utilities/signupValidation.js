@@ -8,8 +8,8 @@ exports.emailValidation=(email)=>{
 }
 
 exports.passwordValidation=(password)=>{
-    const passwordRejex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;;
-    return passwordRejex.test(password)
+    const passwordRejex= /^[a-z]+$/;
+    return passwordRejex.test(password) 
 }
 
 // /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/; = strong password condition

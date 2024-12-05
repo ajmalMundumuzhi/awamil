@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/styles/style.css">
 </head>
 
-<body class="bg-orange-200 flex items-center justify-center min-h-screen">
+<body class="bg-white flex items-center justify-center min-h-screen">
 <% details.forEach(function(detail){ %>
 
     <div class="w-full h-screen max-w-4xl grid grid-rows-2 gap-4 p-4">
@@ -17,17 +17,17 @@
         <!-- Top Half with Two Boxes -->
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2  lg:grid-cols-2">
           <!-- First Box -->
-          <div class="bg-white rounded-lg shadow-lg flex items-center justify-center text-white text-lg font-semibold h-full">
+          <div class="bg-orange-200 rounded-lg shadow-lg flex items-center justify-center text-white text-lg font-semibold h-full">
             <h1 class="text-black"><%= detail.word %></h1>
           </div>
           <!-- Second Box -->
-          <div class="bg-white rounded-lg shadow-lg flex items-center justify-center text-white text-lg font-semibold h-full">
+          <div class="bg-orange-200 rounded-lg shadow-lg flex items-center justify-center text-white text-lg font-semibold h-full">
             <h1 class="text-black"><%= detail.sentence %></h1>
           </div>
         </div>
     
         <!-- Bottom Half with One Big Box -->
-        <div class="bg-white rounded-lg shadow-lg flex items-center justify-center text-white text-lg font-semibold h-full">
+        <div class="bg-orange-200 rounded-lg shadow-lg flex items-center justify-center text-white text-lg font-semibold h-full">
             <h1 class="text-black"><%= detail.grammer %></h1>
         </div>
     

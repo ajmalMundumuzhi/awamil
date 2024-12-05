@@ -11,6 +11,7 @@ userRouter.use(express.urlencoded({ extended: true }));
 userRouter.set('view engine','ejs')
 userRouter.set('views','./views/user')
 
+
 userRouter.get('/',userController.home)
 
 // Get into detail page
